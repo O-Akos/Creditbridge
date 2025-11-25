@@ -3,12 +3,14 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import { toast } from "react-toastify";
 
+/**
+  *  Excel Import és Exportért felelő modul
+  */
+ 
 const STUDENT_SHEET = "HallgatoiAdatok";
 const ACCEPTED_SHEET = "ElfogadottTargyak";
 const REQUIRED_SHEET = "ElőírtTargyak";
- /**
-  *  Excel Import és Exportért felelő modul
-  */
+ 
 export default function ExcelManager({
   userData,
   acceptedSubjects,
