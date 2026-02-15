@@ -100,7 +100,6 @@ export default function ResetPasswordPage() {
             value={form.confirm}
             onChange={handleChange}
           />
-          
           {error && <div className="error-text">{error}</div>}
           
           <button 

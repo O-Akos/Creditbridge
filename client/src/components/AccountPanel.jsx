@@ -106,6 +106,7 @@ export default function AccountPanel() {
   /**
    * Bejelentkezési folyamat kezelése.
    */
+
   const handleLogin = async () => {
   if (!form.email || !form.password) return setError("Adj meg minden mezőt!");
   if (isEmailInvalid(form.email)) {
@@ -146,7 +147,6 @@ export default function AccountPanel() {
   }
   
 };
-
   /**
    * Regisztrációs folyamat kezelése.
    */
