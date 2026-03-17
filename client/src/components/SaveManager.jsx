@@ -37,7 +37,6 @@ export default function SaveManager({
   const { id: routeMajorId } = useParams();
   const majorId = parseInt(routeMajorId);
   const { authFetch } = useAuth();
-
   /**
    * Mentés funkció (saveToSlot) 
    */
@@ -57,6 +56,7 @@ export default function SaveManager({
         acceptedSubjects: acceptedSubjects || {},
         requiredSubjects: requiredSubjects || {},
       };
+
       const res = await authFetch(`${API_URL}/api/save`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

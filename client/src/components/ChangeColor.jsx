@@ -124,6 +124,7 @@ const ChangeColor = ({ userData, setClassColors, refreshColors, onClose }) => {
     setName(selected.name || "");
     applyPresetColors(selected.color_codes || []);
   };
+  
 
   const resetForm = () => {
     setSelectedColors(null);
