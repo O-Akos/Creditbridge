@@ -205,7 +205,9 @@ export default function SaveManager({
     setRequiredSubjects(parsed.requiredSubjects);
     toast.success("Adatok betöltve!");
   };
-
+/** 
+ * Új hallgató kezdése
+*/
   const handleNewStudent = async () => {
   if (!window.confirm("Biztosan új hallgatót szeretnél kezdeni?")) return;
 
