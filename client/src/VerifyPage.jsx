@@ -39,7 +39,6 @@ function VerifyPage() {
         }
         return;
       }
-
       const data = await res.json();
       await fetchUser();
       setStatus("success");
