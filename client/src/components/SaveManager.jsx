@@ -38,7 +38,7 @@ export default function SaveManager({
   const majorId = parseInt(routeMajorId);
   const { authFetch } = useAuth();
   /**
-   * Mentés funkció (saveToSlot) - useCallback-be zárva
+   * Mentés funkció (saveToSlot) 
    */
   const saveToSlot = useCallback(async (slot, name, silent = false) => {
     if (!authUser) return;
