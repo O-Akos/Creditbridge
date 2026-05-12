@@ -29,15 +29,12 @@ export default function ExcelManager({
       toast.warning("Először adja meg a hallgatói adatokat!");
       return;
     }
-
     if (f1.length > 200 || f2.length > 200 || f3.length > 200) {
       toast.error("Túl hosszú hallgatói adatok! (Max 200 karakter/mező)");
       return;
     }
-
     try {
       const workbook = XLSX.utils.book_new();
-
       // Hallgatói adatok
       const studentSheet = XLSX.utils.json_to_sheet([{
         "Intézmény neve": f1,
