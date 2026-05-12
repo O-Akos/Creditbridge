@@ -1,0 +1,28 @@
+.save-panel {
+  display: flex;
+  
+  align-items: center;
+}
+.save-panel button {
+  margin: 5px;
+}
+
+.save-slots {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.save-slot {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.save-slot h4 {
+  margin: 0;
+}
+
+.save-slot button {
+  margin-right: 5px;
+}

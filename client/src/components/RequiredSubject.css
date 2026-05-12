@@ -1,0 +1,37 @@
+.required-drop-area {
+  text-align: center;
+  align-self: center;
+  background-color: var(--background-column);
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  margin: 5px;
+  border-radius: 6px;
+  width: 90%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: var(--text-color);
+}
+
+.dropped-subject-preview {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+button {
+  margin-top: 10px;
+  padding: 6px 12px;
+  background-color: var(--button-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--button-hower-color);
+}
+
+

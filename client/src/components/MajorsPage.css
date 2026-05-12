@@ -1,0 +1,97 @@
+.majors-container {
+  padding: 40px 20px;
+  text-align: center;
+  min-height: 100vh;
+  background-color: var(--background-column);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.majors-header {
+  margin-bottom: 30px;
+}
+
+.majors-header h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+.majors-header p {
+  color: var(--text-color);
+  font-size: 16px;
+}
+
+.add-button {
+  padding: 10px 20px;
+  margin-bottom: 30px;
+  font-size: 16px;
+  background-color: var(--button-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+
+}
+
+.add-button:hover {
+  background-color: var(--button-hower-color);
+}
+
+.majors-list {
+  list-style: none;
+  padding: 0;
+}
+
+.major-item {
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.major-link {
+  font-size: 28px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.major-link:hover {
+  color: var(--subject-card-hover-bg);
+}
+
+.edit-button {
+  padding: 6px 14px;
+  margin-right: 10px;
+  background-color: var(--button-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  transition: 0.2s ease;
+}
+
+.edit-button:hover {
+  background-color: var(--button-hower-color);
+}
+
+.loading {
+  color: #888;
+  font-style: italic;
+}
+.edit-mode-button{
+    padding: 6px 14px;
+  margin-right: 10px;
+  background-color: var(--button-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  transition: 0.2s ease;
+}
+.edit-mode-button:hover{
+    background-color: var(--button-hower-color);
+}

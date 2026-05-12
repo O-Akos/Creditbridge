@@ -1,0 +1,121 @@
+.accept-pairing {
+  align-self: center;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  margin: 10px;
+  border-radius: 6px;
+  width: 360px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: var(--text-color);
+}
+
+.accept-pairing h2 {
+  margin: 10px 0 15px 0px;
+  color: var(--text-color, #2f3542);
+}
+
+.written-subject {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.written-subject input {
+  flex-grow: 1;
+  padding: 5px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--page-bg);
+  color: var(--text-color, #2f3542);
+}
+
+.remove-written-btn {
+  color: red;
+  margin-left: 5px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font-weight: bold;
+}
+
+.add-written-btn {
+  margin-bottom: 10px;
+  background: var(--button-color);
+  border: 1px solid var(--button-border, #ccc);
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  color: var( --text-color);
+}
+
+.drop-zone {
+  min-height: 80px;
+  height: auto;
+  max-height: 350px;
+  overflow-y: auto;
+  border: 2px dashed var(--credit-table-border, #40739e);
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: stretch; 
+  justify-content: flex-start;
+  padding: 10px;
+  background-color: var(--page-bg);
+}
+
+.dropped-item {
+  width: calc(50% - 5px); 
+  box-sizing: border-box; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  background-color: var(--dropped-bg, #d3d0d0);
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  font-size: 0.85rem;
+}
+
+.dropped-item span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal; /* Engedi a több sort a kártyán belül */
+  word-break: break-word;
+  padding-right: 5px;
+}
+
+.remove-dropped-btn {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: red;
+  font-weight: bold;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.accept-btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.accept-btn.enabled {
+  background-color: var(--primary-color, #007bff);
+  cursor: pointer;
+}
+
+.accept-btn.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.warning-text {
+  color: red;
+  font-weight: bold;
+  margin-top: 5px;
+}
