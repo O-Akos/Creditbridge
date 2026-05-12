@@ -6,7 +6,9 @@ import { toast } from "react-toastify";
 const STUDENT_SHEET = "HallgatoiAdatok";
 const ACCEPTED_SHEET = "ElfogadottTargyak";
 const REQUIRED_SHEET = "ElőírtTargyak";
-
+ /**
+  *  Excel Import és Exportért felelő modul
+  */
 export default function ExcelManager({
   userData,
   acceptedSubjects,
