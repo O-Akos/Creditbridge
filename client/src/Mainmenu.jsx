@@ -25,6 +25,12 @@ const refreshMajors = useCallback(() => {
     .then((data) => {
       if (isMounted) {
         setMajors(data);
+        if (Array.isArray(data)) {
+          setMajors(data);
+        } else {
+          console.error("Nincs létrehozott szak.", data);
+          setMajors([]);
+        }
       }
     })
     .catch((err) => { 
@@ -47,9 +53,9 @@ const refreshMajors = useCallback(() => {
     }
   }, [isLoggedIn]);
 
-  const filteredMajors = majors.filter((major) =>
-    major.major_name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredMajors = (majors || []).filter((major) =>
+    major.major_name?.toLowerCase().includes(searchQuery.toLowerCase())
+);
 
   return (
     <div className="majors-container">

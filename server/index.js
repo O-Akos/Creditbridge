@@ -442,29 +442,27 @@ app.get('/api/verify/:token', async (req, res) => {
       [token]
     );
 
-    if (!user.rows.length || user.rows[0].is_verified) {
-      return res.json({ message: "Hitelesítő e-mail elküldve." }); 
-    }
-
     if (!result.rows.length) {
-
       return res.status(400).json({ error: "Hibás vagy lejárt munkamenet!" });
     }
 
     const tokenData = result.rows[0];
-
     if (new Date(tokenData.expires_at) < new Date()) {
-       return res.status(400).json({ error: "Lejár munkamenet!" });
+       return res.status(400).json({ error: "Lejárt munkamenet!" });
     }
 
     const userId = tokenData.user_id;
 
     await pool.query('BEGIN');
-    
     await pool.query(`UPDATE users SET is_verified=true WHERE id=$1`, [userId]);
+
     await pool.query(`DELETE FROM tokens WHERE user_id=$1 AND type='verification'`, [userId]);
-    
-    const userRes = await pool.query(`SELECT id, role, email, first_name, last_name FROM users WHERE id=$1`, [userId]);
+
+    const userRes = await pool.query(
+      `SELECT id, role, email, first_name, last_name FROM users WHERE id=$1`, 
+      [userId]
+    );
+ 
     const user = userRes.rows[0];
 
     const jwtToken = jwt.sign(
@@ -483,7 +481,7 @@ app.get('/api/verify/:token', async (req, res) => {
     });
 
     res.json({ 
-      message: "Email verified and logged in",
+      message: "E-mail hitelesítve.",
       user: {
         id: user.id,
         role: user.role,
@@ -497,7 +495,7 @@ app.get('/api/verify/:token', async (req, res) => {
   } catch (err) {
     await pool.query('ROLLBACK');
     console.error(err);
-    res.status(500).json({ error: "Verification failed" });
+    res.status(500).json({ error: "Hitelesítési hiba!" });
   }
 });
 app.post("/api/login", async (req, res) => {
@@ -519,7 +517,7 @@ app.post("/api/login", async (req, res) => {
     );
 
     if (!user.rows.length)
-      return res.status(400).json({ error: "A felhasználó nem található." });
+      return res.status(400).json({ error: "Hibás e-mail cím, vagy jelszó!" });
 
     if (!user.rows[0].is_verified)
       return res.status(400).json({ error: "Kérem, hitelesítse az e-mail címét!" });
@@ -544,11 +542,11 @@ app.post("/api/login", async (req, res) => {
       sameSite: "strict"
     });
 
-    res.json({ message: "Logged in" });
+    res.json({ message: "Bejelentkezve." });
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Login failed" });
+    res.status(500).json({ error: "Hibás e-mai cím vagy jelszó!" });
   }
 });
 
@@ -908,7 +906,7 @@ app.post('/api/majors', authMiddleware, verifiedMiddleware, async (req, res) => 
 
     const result = await pool.query(
       `INSERT INTO majors (major_name, syllabus_year, category, type, max_credit, accepted_percentage)
-       VALUES ($1, $2, $3, $4, $5 $6) RETURNING *;`,
+       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`,
       [major_name.trim(), syllabus_year, category, type, max_credit, percentage]
     );
     res.json(result.rows[0]);
