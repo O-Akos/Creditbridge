@@ -6,7 +6,7 @@ import "./components/ResetPassword.css";
 function VerifyPage() {
   const { token } = useParams();
   const navigate = useNavigate();
-  const { fetchUser, user: authUser } = useAuth();
+  const { fetchUser} = useAuth();
   const [status, setStatus] = useState("loading");
   const [errorMessage, setErrorMessage] = useState("");
   
