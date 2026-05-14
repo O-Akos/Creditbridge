@@ -286,7 +286,7 @@ const handleDelete = async () => {
     ];
 
     const exampleData = [
-      ['GKNB_INTM114', 'Programozás', '5', '2', '2024', 'Számítástechnikai és programozási ismeretek', 'Kötelező']
+      ['GKNB_INTM114', 'Programozás', '5', '2', '2024', 'Kötelező', 'Számítástechnikai és programozási ismeretek']
     ];
 
     const worksheet = XLSX.utils.aoa_to_sheet([...headers, ...exampleData]);
@@ -395,7 +395,7 @@ const handleDelete = async () => {
   </div>
 
           <div className="modal-section">
-  <label>Tantárgy kategóriák (pl. Számítástechnika):</label>
+  <label>Tantárgy kategóriák (pl. Kötelező):</label>
   {category.map((cat, i) => (
     <div key={i} className="inline-row">
       <input 

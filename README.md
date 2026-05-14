@@ -24,6 +24,7 @@ A rendszer célja, hogy vizuálisan és interaktív módon segítse a kreditátv
 - **Adatbázis:** PostgreSQL
 - **Infrastruktúra:** Docker & Docker Compose
 - **Hitelesítés:** JWT (JSON Web Token) & biztonságos cookie-kezelés
+- **Levelezés:** MailHog
 
 ## Telepítés és futtatás (Docker)
 
@@ -38,6 +39,8 @@ A projekt futtatásához Docker és Docker Compose szükséges.
     Másolja le a mintafájlt .env néven, és szükség esetén módosítsa az értékeket:
     ```bash
     cp .env.example .env
+
+    Fontos: A tantárgyi tematikák letöltéséhez szüksége lesz egy TTR_API_KEY-re. Ezt a ttr.sze.hu oldalon a fejlesztői eszközök (F12) -> Network fül alatt, egy API hívás fejlécéből (header) másolhatja ki.
 
 3. **Indítás:**
     ```bash
