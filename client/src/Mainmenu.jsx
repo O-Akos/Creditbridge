@@ -39,7 +39,7 @@ const refreshMajors = useCallback(() => {
 
   useEffect(() => {
     refreshMajors();
-  }, []);
+  }, [refreshMajors]);
 
   useEffect(() => {
     if (!isLoggedIn) {

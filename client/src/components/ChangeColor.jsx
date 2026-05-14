@@ -55,7 +55,7 @@ const ChangeColor = ({ userData, setClassColors, refreshColors, onClose }) => {
     } catch (err) {
       console.error("Hiba a színprofilok frissítésekor:", err);
     }
-  }, [majorId]);
+  }, [majorId, authFetch]);
 
   /**
    * Adatok betöltése.
@@ -124,7 +124,7 @@ const ChangeColor = ({ userData, setClassColors, refreshColors, onClose }) => {
     setName(selected.name || "");
     applyPresetColors(selected.color_codes || []);
   };
-  
+
 
   const resetForm = () => {
     setSelectedColors(null);

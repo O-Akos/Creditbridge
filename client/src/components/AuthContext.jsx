@@ -1,9 +1,9 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  
+
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const API_URL = process.env.REACT_APP_API_URL;
@@ -21,11 +21,10 @@ export const AuthProvider = ({ children }) => {
       window.location.href = "/"; 
     }
   };
- const fetchUser = async () => {
+const fetchUser = useCallback(async () => {
   try {
     const res = await fetch(`${API_URL}/api/me`, { credentials: 'include' });
 
-    // Ha a válasz 401 (Unauthorized), az nem hiba, csak nincs bejelentkezve.
     if (res.status === 401) {
       setUser(null);
       return;
@@ -43,7 +42,7 @@ export const AuthProvider = ({ children }) => {
   } finally {
     setLoading(false);
   }
-};
+}, [API_URL]);
 const authFetch = async (url, options = {}) => {
     const res = await fetch(url, { ...options, credentials: 'include' });
     if (res.status === 401) {
@@ -55,7 +54,7 @@ const authFetch = async (url, options = {}) => {
 
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, [fetchUser]);
 
   return (
     <AuthContext.Provider value={{ user, setUser, fetchUser, loading, logout, authFetch }}>

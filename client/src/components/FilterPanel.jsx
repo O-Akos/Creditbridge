@@ -47,7 +47,7 @@ export default function FilterPanel({ filters, setFilters }) {
       });
 
     return () => controller.abort();
-  }, [id]);
+  }, [id, API_URL]);
 
  
   const toggletype = useCallback((type) => {

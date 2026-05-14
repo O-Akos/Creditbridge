@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import './AccountPanel.css';
 import { useAuth } from './AuthContext';
@@ -56,13 +56,12 @@ function MiniWindow({ title, children, onClose }) {
 }
 
 export default function AccountPanel() {
-  const { user: authUser, setUser, fetchUser, logout, authFetch } = useAuth();
+  const { user: authUser, fetchUser, logout, authFetch } = useAuth();
   // API elérési útja a környezeti változókból
   const API_URL = process.env.REACT_APP_API_URL;
 
   // Állapotkezelés (States)
   const [isVerified, setIsVerified] = useState(true); // Email megerősítettség állapota
-  const [loading, setLoading] = useState(false);     // Betöltési állapot (hálózati kérések alatt)
   const [error, setError] = useState(null);           // Hibaüzenetek tárolása
   const [form, setForm] = useState({                  // Az összes űrlap közös állapota
     first_name: '', last_name: '', email: '', password: '',
@@ -70,7 +69,7 @@ export default function AccountPanel() {
   });
   const [activeWindow, setActiveWindow] = useState(null); // Aktuálisan látható ablak
   const [resendCooldown, setResendCooldown] = useState(0); // Újraküldési időzítő (másodperc)
-  const didMount = useRef(false);                     // Segédlet az egyszeri betöltéshez
+
 
   // Űrlap mezőinek alaphelyzetbe állítása
   const resetForm = () => setForm({
@@ -112,7 +111,6 @@ export default function AccountPanel() {
   if (isEmailInvalid(form.email)) {
     return setError("Érvénytelen e-mail cím formátum!");
   }
-  setLoading(true);
   setError(null);
 
   try {
@@ -142,8 +140,6 @@ export default function AccountPanel() {
     }
   } catch {
     setError('Hálózati hiba');
-  } finally { 
-    setLoading(false); 
   }
   
 };
@@ -163,7 +159,6 @@ export default function AccountPanel() {
   const pwdError = getPasswordError(form.password);
   if (pwdError) return setError(pwdError);
 
-  setLoading(true); 
   setError(null);
 
   try {
@@ -187,9 +182,8 @@ export default function AccountPanel() {
       }
   } catch {
     setError('Hálózati hiba.');
-  } finally { 
-    setLoading(false); 
-  }
+  } 
+
 };
 
   /**
@@ -197,7 +191,7 @@ export default function AccountPanel() {
    */
   const handleResend = async () => {
     if (resendCooldown > 0) return;
-    setLoading(true); setError(null);
+    setError(null);
     try {
       const res = await fetch(`${API_URL}/api/resend-verification`, {
         method: 'POST',
@@ -209,7 +203,7 @@ export default function AccountPanel() {
       else setResendCooldown(60); 
     } catch {
       setError('Hálózati hiba');
-    } finally { setLoading(false); }
+    }
   };
 
   /**
@@ -222,7 +216,6 @@ export default function AccountPanel() {
     return setError("Érvénytelen e-mail cím formátum!");
   }
 
-    setLoading(true); 
     setError(null);
     try {
       const res = await fetch(`${API_URL}/api/request-reset`, {
@@ -237,8 +230,6 @@ export default function AccountPanel() {
       }
     } catch {
       setError('Hálózati hiba');
-    } finally { 
-      setLoading(false); 
     }
   };
 
@@ -255,7 +246,7 @@ export default function AccountPanel() {
   const pwdError = getPasswordError(form.new_password1);
   if (pwdError) return setError(pwdError);
 
-    setLoading(true); setError(null);
+    setError(null);
     try {
       const res = await authFetch(`${API_URL}/api/change-password`, {
         method: 'POST',
@@ -274,7 +265,6 @@ export default function AccountPanel() {
       else { toast.success("Jelszó sikeresen megváltoztatva."); 
       setActiveWindow("account"); }
     } catch { setError('Hálózati hiba'); }
-    finally { setLoading(false); }
   };
 
   /**

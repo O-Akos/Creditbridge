@@ -70,7 +70,6 @@ function UnifiedList({ items, onRemove, classColors = [] }) {
       <div className="unified-list-header">
         <h2>Összes Tárgy</h2>
         
-        {/* Szűrő legördülő menü */}
         <select
           value={filterType}
           onChange={(e) => setFilterType(e.target.value)}
@@ -100,10 +99,8 @@ function UnifiedList({ items, onRemove, classColors = [] }) {
             const majorClass = getMajorClass(item);
             const bgColor = colorMap[majorClass] || "var(--bg-color-main)";
 
-            {/* Elfogadott tárgyak megjelenítése */}
             if (item.type_a === 'accepted') {
               const externalLabel = item.externalNames.join(' + ');
-              const internalLabel = item.internalSubjects.map(sub => sub.name).join(' + ');
               const internalWithCredits = item.internalSubjects
                 .map(sub => `${sub.name} (${sub.credit})`)
                 .join(' + ');
@@ -123,7 +120,6 @@ function UnifiedList({ items, onRemove, classColors = [] }) {
               );
             }
 
-            {/* Előírt tárgyak megjelenítése */}
             if (item.type_a === 'required') {
               return (
                 <li

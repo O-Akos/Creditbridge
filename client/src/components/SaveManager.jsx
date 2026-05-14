@@ -83,7 +83,7 @@ export default function SaveManager({
       console.error(e);
       if (!silent) toast.error("Hiba a mentés során!");
     }
-  }, [authUser, userData, acceptedSubjects, requiredSubjects, majorId, API_URL]);
+  }, [authUser, userData, acceptedSubjects, requiredSubjects, majorId, API_URL, authFetch]);
 
   /**
    * Első mentés létrehozása
@@ -130,7 +130,7 @@ export default function SaveManager({
       .catch(err => isMounted && console.error(err));
 
     return () => { isMounted = false; };
-  }, [userData, majorId, API_URL]);
+  }, [userData, majorId, API_URL, authFetch]);
 
   /**
    * Szakváltás kezelése
@@ -175,7 +175,7 @@ export default function SaveManager({
     };
 
     loadQuickSave();
-  }, [authUser, majorId, API_URL, setAcceptedSubjects, setRequiredSubjects, setUserData, saveToSlot]);
+  }, [authUser, majorId, API_URL, setAcceptedSubjects, setRequiredSubjects, setUserData, saveToSlot, authFetch]);
 
   /**
    * Autosave funkció

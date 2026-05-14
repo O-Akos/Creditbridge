@@ -35,7 +35,7 @@ export default function CreditTable({ acceptedSubjects = [], requiredSubjects = 
 
     fetchCategories();
     return () => controller.abort();
-  }, [majorId]);
+  }, [majorId, API_URL]);
 
   const stats = useMemo(() => {
     const flattenedAccepted = acceptedSubjects.flatMap(entry => entry.internalSubjects || []);

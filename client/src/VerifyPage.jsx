@@ -39,13 +39,12 @@ function VerifyPage() {
         }
         return;
       }
-      const data = await res.json();
+      await res.json();
       await fetchUser();
       setStatus("success");
       timeoutId = setTimeout(() => navigate("/"), 2500);
 
     } catch (err) {
-      // IDE FUT BE, HA NINCS ADATBÁZIS KAPCSOLAT / SZERVERHIBA
       console.error("Hálózati hiba:", err);
       setErrorMessage("Hálózati hiba: Nem sikerült elérni a szervert. Kérjük, próbáld meg később!");
       setStatus("error");

@@ -3,6 +3,7 @@ const cors = require('cors');
 const { Pool } = require('pg');
 require('dotenv').config();
 const path = require('path');
+const app = express();
 
 const validatePassword = (pwd) => {
   const hasUpper = /[A-Z]/.test(pwd); // Tartalmaz nagybetűt?
@@ -44,9 +45,11 @@ const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
 
 
-const app = express();
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5000'],
+  // Ha production-ben vagyunk, a valódi URL-t használjuk, egyébként a localhostot
+  origin: process.env.NODE_ENV === 'production' 
+          ? process.env.FRONTEND_URL 
+          : ['http://localhost:3000', 'http://localhost:5000'],
   credentials: true
 }));
 app.use(express.json());

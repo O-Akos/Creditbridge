@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Navigate } from 'react';
+import React, { useEffect, Navigate } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import MainMenu from './Mainmenu';
 import Application from './Application';
@@ -13,15 +13,13 @@ import { ToastContainer, toast} from 'react-toastify';
  */
 function App() {
 
-  
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
   useEffect(() => {
     const handleOnline = () => {
-      setIsOnline(true);
+
       toast.success("Internetkapcsolat helyreállt!");
     };
     const handleOffline = () => {
-      setIsOnline(false);
       toast.error("Nincs internetkapcsolat!", { autoClose: false, toastId: 'offline' });
     };
 
