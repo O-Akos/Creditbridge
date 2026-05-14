@@ -10,7 +10,6 @@ function VerifyPage() {
   const [status, setStatus] = useState("loading");
   const [errorMessage, setErrorMessage] = useState("");
   
-  // Ez a ref megakadályozza a végtelen ciklust és a dupla hívást
   const hasCalledVerify = useRef(false);
 
  useEffect(() => {
@@ -25,38 +24,37 @@ function VerifyPage() {
         `${process.env.REACT_APP_API_URL}/api/verify/${token}`,
         { credentials: 'include' }
       );
-
+      const data = await res.json();
       if (!res.ok) {
-        const errorData = await res.json();
-        await fetchUser();
-        
-        if (authUser || errorData.message === "Email verified and logged in") {
-          setStatus("success");
-          timeoutId = setTimeout(() => navigate("/"), 2500);
-        } else {
-          setErrorMessage(errorData.message || "A megerősítő link érvénytelen vagy már lejárt.");
-          setStatus("error");
+          if (data.message === "Hitelesítő e-mail elküldve." || data.message === "E-mail hitelesítve.") {
+             await fetchUser();
+             setStatus("success");
+             timeoutId = setTimeout(() => navigate("/"), 2500);
+          } else {
+            setErrorMessage(data.error || data.message || "A megerősítő link érvénytelen vagy már lejárt.");
+            setStatus("error");
+          }
+          return;
         }
-        return;
+
+        // SIKER ÁG
+        await fetchUser();
+        setStatus("success");
+        timeoutId = setTimeout(() => navigate("/"), 2500);
+
+      } catch (err) {
+        console.error("Hálózati hiba:", err);
+        setErrorMessage("Hálózati hiba: Nem sikerült elérni a szervert.");
+        setStatus("error");
       }
-      await res.json();
-      await fetchUser();
-      setStatus("success");
-      timeoutId = setTimeout(() => navigate("/"), 2500);
+    };
 
-    } catch (err) {
-      console.error("Hálózati hiba:", err);
-      setErrorMessage("Hálózati hiba: Nem sikerült elérni a szervert. Kérjük, próbáld meg később!");
-      setStatus("error");
-    }
-  };
+    verify();
 
-  verify();
-
-  return () => {
-    if (timeoutId) clearTimeout(timeoutId);
-  };
-}, [token, navigate, fetchUser, authUser]);
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [token, navigate, fetchUser]);
   return (
     <div className="reset-container">
       <div className="reset-form-wrapper">

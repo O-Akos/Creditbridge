@@ -31,11 +31,7 @@ A projekt futtatásához Docker és Docker Compose szükséges.
 
 1. **Repozitórium klónozása:**
    ```bash
-<<<<<<< HEAD
-   git clone [https://github.com/O-Akos/Creditbridge](https://github.com/O-Akos/Creditbridge)
-=======
    git clone https://github.com/O-Akos/Creditbridge
->>>>>>> develop
    cd Creditbridge
 
 2. **Környezeti változók:**
